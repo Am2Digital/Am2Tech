@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> -->
+        <link rel="stylesheet" href="style.css">
+        <script src="https://kit.fontawesome.com/a2e38edca1.js" crossorigin="anonymous"></script>
+   
+		<title>Profile Card</title>
+       
+	</head>
+	<body>
+             <div class="container">
+                 <div class="profile">
+                     <div class="top-icons">
+                <div>
+                     <i onclick="sauvegarderContact()" class="fas fa-save"></i>
+                     
+                </div>
+    <div>
+                <i onclick="partagerContact()" class="fas fa-share-alt"></i>
+                <!-- <i class="fas fa-voicemail"></i> -->
+            </div>
+
+        </div>
+        <img src="IMG_2071.JPG" class="user-img">
+        <h2>Am2Tech</h2>
+        <p>Developpeur Web Marketin digital </p>
+
+        <!-- <button onclick="sauvegarderContact()">Sauvegarder Contact</button> -->
+        <a href="tel:06-52-80-51-05" class="btn">Appelez-moi</a>
+        <a href="mailto:Amin75013@hotmail.fr?subject=subject text" class="btn">Envoyer-moi un e-mail</a>
+        <a href="sms:0652805105?body=Bonjour%20!%20Comment%20ça%20va%20?" class="btn">Envoyez un sms</a>
+      
+        
+        <div class="social-media">
+        <div>
+            <a href="https://www.instagram.com/ahmed.cchh?igsh=OWkxNzJqNjg0ODM1&utm_source=qr"><img src="instagram-icon-logo-free-png.webp"></a>
+            <!-- <h3>20k</h3>
+            <p>Follow</p> -->
+            </div>
+            <div>
+                <a href="https://snapchat.com/t/g3MahKbK"><img src="snapchat-logo-icon-social-media-icon-free-png.webp"></a>
+                <!-- <h3>20k</h3>
+                <p>Follow</p> -->
+                </div>
+                
+            <div>
+    <a href="https://www.facebook.com/share/1DLPftGU4G/?mibextid=wwXlfr"><img src="R.png"></a>
+            <!-- <h3>20k</h3>
+            <p>Follow</p> -->
+            </div>
+        </div>
+
+        </div>
+       </div>
+       <script>
+        const prenom = "Jean";
+        const nom = "Dupont";
+        const telephone = "+33123456789";
+        const email = "jean.dupont@example.com";
+        
+        const vCard = `BEGIN:VCARD
+        VERSION:3.0
+        FN:${prenom} ${nom}
+        TEL;TYPE=CELL:${telephone}
+        EMAIL:${email}
+        END:VCARD`;
+        
+        function sauvegarderContact() {
+          const blob = new Blob([vCard], { type: 'text/vcard;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+        
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = `${prenom}_${nom}.vcf`;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          URL.revokeObjectURL(url);
+        }
+        
+        async function partagerContact() {
+          if (navigator.share) {
+            try {
+              const file = new File([vCard], `${prenom}_${nom}.vcf`, { type: 'text/vcard;charset=utf-8' });
+              await navigator.share({
+                title: 'Partager Contact',
+                text: 'Voici les informations du contact :',
+                files: [file]
+              });
+            } catch (error) {
+              alert('Erreur lors du partage : ' + error);
+            }
+          } else {
+            alert("Votre navigateur ne supporte pas le partage de fichiers.");
+          }
+        }
+        </script>
+     
+	</body>
+</html>
