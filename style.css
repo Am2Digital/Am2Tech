@@ -22,7 +22,7 @@
     padding: 30px 20px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
-    color:#ffffff;
+    color:#ede8e8;
 }
 .top-icons{
     display: flex;
@@ -84,5 +84,8 @@
     margin: 10px 0 30px;
    }
 
+.profile i{
+    font-size: 25px;
+}
 
    
