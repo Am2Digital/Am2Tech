@@ -18,7 +18,7 @@
                  <div class="profile">
                      <div class="top-icons">
                 <div>
-                     <i onclick="sauvegarderContact()" class="fas fa-save"></i>
+                     <i onclick="enregistrerContact()" class="fas fa-save"></i>
                      
                 </div>
     <div>
@@ -27,9 +27,9 @@
             </div>
 
         </div>
-        <img src="IMG_2071.JPG" class="user-img">
+        <img src="1.png" class="user-img">
         <h2>Am2Tech</h2>
-        <p>Developpeur Web Marketin digital </p>
+        <p>Développeur web Marketing digital </p>
 
         <!-- <button onclick="sauvegarderContact()">Sauvegarder Contact</button> -->
         <a href="tel:06-52-80-51-05" class="btn">Appelez-moi</a>
@@ -56,33 +56,38 @@
             </div>
         </div>
 
+        <p>by Am2Tech</p>
+
         </div>
        </div>
        <script>
-        const prenom = "Ahmed";
-        const nom = "Am2Tech";
-        const telephone = "+0652805105";
-        const email = "amin75013@hotmail.fr";
-        
-        const vCard = `BEGIN:VCARD
-        VERSION:3.0
-        FN:${prenom} ${nom}
-        TEL;TYPE=CELL:${telephone}
-        EMAIL:${email}
-        END:VCARD`;
-        
-        function sauvegarderContact() {
-          const blob = new Blob([vCard], { type: 'text/vcard;charset=utf-8' });
-          const url = URL.createObjectURL(blob);
-        
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = `${prenom}_${nom}.vcf`;
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          URL.revokeObjectURL(url);
-        }
+        function enregistrerContact(nom, numeroTelephone) {
+    const contact = {
+        name: nom,
+        tel: numeroTelephone
+    };
+
+    if (navigator.share && navigator.canShare && navigator.canShare({ files: [] })) {
+        const vCard = `BEGIN:VCARD\nVERSION:3.0\nFN:${nom}\nTEL;TYPE=CELL:${numeroTelephone}\nEND:VCARD`;
+        const blob = new Blob([vCard], { type: 'text/vcard' });
+        const file = new File([blob], `${nom}.vcf`, { type: 'text/vcard' });
+
+        navigator.share({
+            files: [file],
+            title: 'Partager contact',
+            text: `Contact de ${nom}`
+        }).then(() => {
+            alert('Contact prêt à être enregistré.');
+        }).catch((error) => {
+            alert(`Erreur lors du partage du contact: ${error}`);
+        });
+    } else {
+        alert("Votre appareil ou navigateur ne supporte pas le partage de contacts.");
+    }
+}
+
+// Insère tes coordonnées ici :
+enregistrerContact("Am2tech", "06.52.80.51.05");
         
         async function partagerContact() {
           if (navigator.share) {
