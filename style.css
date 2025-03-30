@@ -89,3 +89,117 @@
 }
 
    
+
+
+/* chatbot */
+
+#robot-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25d366;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 1000;
+  }
+
+  #chatbox {
+    width: 360px;
+    height: 600px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    display: none;
+    z-index: 999;
+  }
+
+  #messages {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+  }
+
+  .message {
+    max-width: 80%;
+    margin: 8px 0;
+    padding: 10px 15px;
+    border-radius: 20px;
+    line-height: 1.4;
+    font-size: 14px;
+    display: inline-block;
+  }
+
+  .bot {
+    background-color: #f1f0f0;
+    align-self: flex-start;
+    border-top-left-radius: 0;
+  }
+
+  .user {
+    background-color: #dcf8c6;
+    align-self: flex-end;
+    border-top-right-radius: 0;
+  }
+
+  #input-container {
+    display: flex;
+    border-top: 1px solid #ddd;
+  }
+
+  input[type="text"] {
+    flex-grow: 1;
+    border: none;
+    padding: 15px;
+    font-size: 14px;
+    outline: none;
+  }
+
+  #contact-form {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 15px;
+    background-color: #fafafa;
+  }
+
+  #contact-form input {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+
+  #contact-form button {
+    padding: 10px;
+    font-size: 14px;
+    background-color: #25d366;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+
+
+
+
+/* body { font-family: Arial, sans-serif; background: #f4f4f4; }
+#chat { width: 400px; margin: 50px auto; background: white; border-radius: 10px; box-shadow: 0 0 10px #ccc; padding: 20px; }
+.message { margin: 10px 0; }
+.bot { color: #333; }
+.user { color: #007BFF; text-align: right; }
+input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; } */
+
+
