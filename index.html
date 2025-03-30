@@ -15,17 +15,39 @@
        
 	</head>
 	<body>
+
+        <!-- Bouton robot -->
+
              <div class="container">
                  <div class="profile">
                      <div class="top-icons">
                 <div>
-                     <i onclick="enregistrerContact()" class="fas fa-save"></i>
+                     <i onclick="saveContact()" class="fas fa-save"></i>
                      
                 </div>
-    <div>
-                <i onclick="partagerContact()" class="fas fa-share-alt"></i>
+                <div>
+                <i onclick="shareContact()" class="fas fa-share-alt"></i>
+               
+              
+                <!-- <i class="fas fa-robot"></i> -->
                 <!-- <i class="fas fa-voicemail"></i> -->
+
+
+                <!-- CHATBOT -->
+
+                <!-- <div id="chat">
+                    <div class="message bot" id="bot-message">Bonjour 👋, souhaitez-vous prendre un rendez-vous chez le Dr Dupont ? (Oui / Non)</div>
+                  </div>
+                  <input type="text" id="user-input" placeholder="Tapez votre réponse ici..." />
+                   -->
+
+
+
             </div>
+
+
+
+            
 
         </div>
         <img src="1.png" class="user-img">
@@ -64,5 +86,148 @@
        </div>
     
       
+
+<!-- Bouton robot -->
+<button id="robot-btn" onclick="toggleChat()">🤖</button>
+
+<!-- Chatbot box -->
+<div id="chatbox">
+  <div id="messages">
+    <div class="message bot">👋 Bonjour ! Je suis votre assistant digital. Vous cherchez un site web 💻, de la pub 📢 ou un boost SEO 📈 ?</div>
+  </div>
+
+  <div id="input-container">
+    <input type="text" id="user-input" placeholder="Votre réponse ici...">
+  </div>
+
+  <div id="contact-form">
+    <input type="text" id="name" placeholder="Votre prénom et nom">
+    <input type="email" id="email" placeholder="Votre email">
+    <input type="tel" id="phone" placeholder="Votre numéro de téléphone">
+    <button onclick="sendContact()">Envoyer le formulaire</button>
+  </div>
+</div>
+
+<script>
+  const messages = document.getElementById('messages');
+  const input = document.getElementById('user-input');
+  const form = document.getElementById('contact-form');
+  const chatbox = document.getElementById('chatbox');
+
+  let step = 0;
+  const userData = {};
+
+  function toggleChat() {
+    if (chatbox.style.display === 'none' || chatbox.style.display === '') {
+      chatbox.style.display = 'flex';
+    } else {
+      chatbox.style.display = 'none';
+    }
+  }
+
+  const addMessage = (text, sender) => {
+    const msg = document.createElement('div');
+    msg.className = `message ${sender}`;
+    msg.textContent = text;
+    messages.appendChild(msg);
+    messages.scrollTop = messages.scrollHeight;
+  };
+
+  input.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      const text = input.value.trim();
+      if (!text) return;
+      addMessage(text, 'user');
+      input.value = '';
+
+      setTimeout(() => {
+        switch (step) {
+          case 0:
+            if (/site|web/i.test(text)) {
+              userData.need = "Site Web";
+              addMessage("Super ! Vous souhaitez un site vitrine, e-commerce ou autre ?", 'bot');
+              step = 1;
+            } else if (/pub|ads|facebook|google/i.test(text)) {
+              userData.need = "Publicité";
+              addMessage("Parfait ! Avez-vous déjà une audience ou on part de zéro ?", 'bot');
+              step = 2;
+            } else if (/seo|référencement/i.test(text)) {
+              userData.need = "SEO";
+              addMessage("Souhaitez-vous améliorer un site existant ou partir de zéro ?", 'bot');
+              step = 3;
+            } else {
+              addMessage("Pouvez-vous préciser : site web 💻, pub 📢 ou SEO 📈 ?", 'bot');
+            }
+            break;
+
+          case 1:
+            userData.siteType = text;
+            addMessage("Top ! Avez-vous déjà un logo ou une charte graphique ?", 'bot');
+            step = 4;
+            break;
+
+          case 2:
+            userData.audience = text;
+            addMessage("Souhaitez-vous qu’on vous crée une stratégie complète avec visuels, ciblage et suivi ?", 'bot');
+            step = 4;
+            break;
+
+          case 3:
+            userData.seoType = text;
+            addMessage("Souhaitez-vous un audit SEO gratuit pour savoir où vous en êtes ?", 'bot');
+            step = 4;
+            break;
+
+          case 4:
+            userData.details = text;
+            addMessage("Merci ! Dernière étape 🙌, laissez-nous vos coordonnées pour qu'on vous contacte :", 'bot');
+            input.style.display = 'none';
+            form.style.display = 'flex';
+            step = 99;
+            break;
+        }
+      }, 400);
+    }
+  });
+
+  function sendContact() {
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+
+    if (!name || !email || !phone) {
+      alert("Merci de remplir tous les champs !");
+      return;
+    }
+
+    userData.name = name;
+    userData.email = email;
+    userData.phone = phone;
+
+    addMessage(`✅ Merci ${name} ! Nous vous contacterons très vite à ${email} ou au ${phone}.`, 'bot');
+    form.style.display = 'none';
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
